@@ -16,24 +16,28 @@ public static void main(String[] args) {
             case 1:
            // System.out.println("Introduce un número: ");
            // int n = new Scanner(System.in).nextInt();
-           int datos[] = {50,40,60,55,35,45,90};
-           for (int n : datos) {
-                agregar(arbol,n);
-           }
-                
+
+                int datos[] = {50,40,60,55,35,45,90};
+                for (int n : datos) {
+                        agregar(arbol,n);
+                }
+                        
             break;
             case 2:
-            preorden(arbol);
+                preorden(arbol);
             break;
             case 3:
-            inorden(arbol);
+                inorden(arbol);
             break;
             case 4:
-            postorden(arbol);
+                postorden(arbol);
             break;
             case 5:
+
             break;
             case 6:
+            System.out.println("Ingrese el numero a eliminar: ");
+                arbol = eliminar(arbol, new Scanner(System.in).nextInt());
             break;
             case 7:
                 System.exit(0);
@@ -41,6 +45,27 @@ public static void main(String[] args) {
         }
     }
 }
+
+
+
+public static Arbol eliminar(Arbol a,int n){
+    if(a!=null && a.dato==n){
+        System.out.println("Dato para eliminar encontrado " + a.dato);
+        a = null;        
+    }else{
+        if(a!=null && n<a.dato){ //izquierda            
+            System.out.println("Nodo "+ a.dato+" IZQ");
+               a.izq = eliminar(a.izq,n);            
+        }else{ //derecha
+            if(a!=null){                
+                System.out.println("Nodo "+ a.dato+" DER");
+                a.der = eliminar(a.der, n);
+            }
+        }
+    }
+    return a;
+}
+
 
 public static void agregar(Arbol a,int n){
     if(a==null){
